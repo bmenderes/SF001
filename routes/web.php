@@ -45,3 +45,7 @@ Route::get('exceltest', function () {
 
     return $text;
 });
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');

@@ -11,8 +11,10 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
         "laravel/horizon": "^5.7",
+        "laravel/jetstream": "^2.6",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "livewire/livewire": "^2.5",
         "phpoffice/phpspreadsheet": "^1.21",
         "psr/log": "^1.1",
         "shopify/shopify-api": "^1.0"
