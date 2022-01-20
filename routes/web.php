@@ -5,6 +5,7 @@ use Shopify\Clients\Rest;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\Storage;
 use App\Helpers\TranslateHelper as TranslateClient;
+use App\Http\Controllers\TranslationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +50,7 @@ Route::get('exceltest', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/translate', [TranslationController::class,'index'])->name('translate');
+Route::middleware(['auth:sanctum', 'verified'])->get('/edit/{id}', [TranslationController::class,'edit'])->name('edit');
+Route::middleware(['auth:sanctum', 'verified'])->post('/edit', [TranslationController::class,'update'])->name('update');
