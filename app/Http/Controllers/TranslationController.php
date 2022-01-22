@@ -15,9 +15,9 @@ class TranslationController extends Controller
      */
     public function index()
     {
-        $translate = Translation::paginate(15);   
+        $translate = Translation::paginate(15);
 
-        return view('translate.list')->with(['translate'=>$translate]);
+        return view('translate.list')->with(['translate' => $translate]);
     }
 
     /**
@@ -44,53 +44,48 @@ class TranslationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Translation  $translation
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Translation $translation)
     {
-       //
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Translation  $translation
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Translation $translation)
     {
-        $translate = Translation::where('id', $id)->first();
-        return view('translate.edit')->with(['translate'=>$translate]);
+        return view('translate.edit')->with(['translate' => $translation]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Translation  $translation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Translation $translation)
     {
-     
-       $translate = Translation::where('id', $request->id)->first();
-       Cache::forget($translate->result);
-       $translate->result = $request->result;
-       $translate->save();
-       
-       return redirect()->route('translate')->with('message','Updeted successfully.');
-        
+        $translation->result = $request->result;
+        $translation->save();
+        Cache::forget("translation:" . $translation->target . ":" . $translation->string);
+
+        return redirect()->route('translations.index')->with('message', 'Updeted successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Translation  $translation
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Translation $translation)
     {
         //
     }
