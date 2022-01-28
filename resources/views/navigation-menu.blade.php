@@ -16,9 +16,16 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('translations.index') }}"
-                        :active="request()->routeIs('translations.*')">
+                        :active="request()->routeIs('translations.index')">
                         {{ __('Translate') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('deneme') }}" :active="request()->routeIs('deneme')">
+                        {{ __('Deneme') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('team') }}" :active="request()->routeIs('team')">
+                        {{ __('Team') }}
+                    </x-jet-nav-link>
+                
                 </div>
             </div>
 

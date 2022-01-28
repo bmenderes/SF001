@@ -5,6 +5,7 @@ use Shopify\Clients\Rest;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\Storage;
 use App\Helpers\TranslateHelper as TranslateClient;
+use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TranslationController;
 
 /*
@@ -51,4 +52,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::resource('translations', TranslationController::class)->only(['index','edit','update'])->middleware(['auth:sanctum', 'verified']);
+Route::resource('translations', TranslationController::class)->only(['index','edit','update',])->middleware(['auth:sanctum', 'verified']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/deneme',[ TranslationController::class,'deneme'])->name('deneme');
+Route::middleware(['auth:sanctum', 'verified'])->get('/team',[ TeamController::class,'team'])->name('team');
+Route::middleware(['auth:sanctum', 'verified'])->get('/team_post',[ TeamController::class,'team_post'])->name('team.post');
+Route::middleware(['auth:sanctum', 'verified'])->get('/score',[ TeamController::class,'score'])->name('score');
+Route::middleware(['auth:sanctum', 'verified'])->get('/score/{week}',[ TeamController::class,'show'])->name('show');

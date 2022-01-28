@@ -50,6 +50,7 @@ class TranslationController extends Controller
     public function show(Translation $translation)
     {
         //
+
     }
 
     /**
@@ -88,5 +89,49 @@ class TranslationController extends Controller
     public function destroy(Translation $translation)
     {
         //
+    }
+
+    public function deneme()
+    {
+        $teams = [
+            ['Fenerbahce',80], 
+            ['Besiktas',75], 
+            ['Galatasaray',70],
+            ['Trabzon',67],
+            ['Bursa',67],
+            ['Sivas',67],
+        ];
+        
+        $teams1 = $teams;
+
+        $arr = [];
+        $fixture = [];
+        $temp = $teams;
+        for ($k = 0; $k < count($teams); $k++) :
+            for ($j = 0; $j < count($teams) - 1; $j++) :
+                for ($i = 0; $i < 2; $i++) :                    
+                    array_push($arr, $temp[$i]);
+                endfor;               
+                array_push($arr,$j+1); // week number
+                unset($temp[1]);
+                $temp = array_values($temp);
+                array_push($fixture, $arr);
+                $arr = [];
+            endfor;
+            unset($teams[0]);
+            $teams = array_values($teams);
+            $temp = $teams;
+            if(count($temp)==2){
+                
+                array_push($temp, count($teams1) - 1); // week number for last match
+                array_push($fixture, $temp);
+            }
+        endfor;
+        shuffle($fixture);
+        
+        
+
+
+        return view('translate.deneme')->with(['fixture' => $fixture, 'teams'=> $teams1]);
     }
 }
